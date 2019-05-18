@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="never">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>galgame汉化硬盘galgame资源下载-花火学园论坛</title>
+
+    <style type="text/css">
+        .nav-bg {
+            background-color: rgba(10, 10, 0, 0.7);
+        }
+
+        body {
+            cursor: url(img/mouse1.cur),url(img/mouse1.cur),auto;
+        }
+
+        a,button{
+            cursor: url(img/mouse2.cur),url(img/mouse2.cur),auto;
+        }
+
+        .dropdown-item:hover{
+            background-color: red;
+        }
+
+@media (min-width: 576px) {
+    .card {
+        background-color: rgba(230, 238, 232, 0.5);
+    }
+
+    .card-header {
+        background-color: transparent;
+    }
+
+        h1 {
+            font-size: 1.2rem;
+        }
+    .shadow:hover {
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+    }
+
+    body{
+        background: url("img/BG1.jpg") fixed;
+    }
+}
+
+        @media (max-width: 574px) {
+
+            h1 {
+                font-size: 1rem;
+            }
+            body{
+                background: #f0f0f0 url(img/bg4.gif) fixed;
+            }
+            .card {
+                background-color: rgba(230, 238, 232, 0.5);
+            }
+
+            .card-header {
+                background-color: transparent;
+            }
+
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div id="app">
+<!--页眉-->
+<header>
+    <nav class="navbar navbar-expand-sm fixed-top navbar-light nav-bg">
+        <a class="navbar-brand offset-sm-1 mr-5 text-white" href="https://www.say-huahuo.com">花火学园</a>
+        <button class="navbar-toggler" data-target="#navbarToggler" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarToggler">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link mr-5 text-white" href="/">首页</a>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="btn text-white dropdown-toggle" type="button" data-toggle="dropdown" >
+                            游戏标签
+                        </button>
+                        <div class="dropdown-menu nav-bg">
+                            <a class="dropdown-item text-white" href="#">敬请期待！</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="form-inline form-row">
+                <input class="form-control col mr-1" placeholder="请输入关键词" v-model="keyword">
+                <button class="btn btn-outline-primary col-auto mr-sm-5 text-white" @click="search">搜索</button>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <!--占位-->
+    <div class="row invisible">
+        <nav class="navbar navbar-expand-sm"><span class="navbar-brand">汉化硬盘版 galgame 资源 下载 论坛</span></nav>
+    </div>
+    <hr>
+    <!--正文-->
+    <article>
+        <div class="row">
+            <div class="col-sm-6 col-xl-4 mb-3" v-for="item in pagelist">
+                <!--大设备卡片-->
+                <div class="card rounded shadow position-relative d-none d-sm-block">
+                    <div class="card-header p-1">
+                        <div class="row justify-content-center">
+                            <h1 class="bg-info p-1 rounded m-1" data-toggle="tooltip" :title="item.date">{{item.title}}</h1>
+                        </div>
+                    </div>
+                    <div class="shadow border rounded-sm border-dark m-2">
+                    <div class="embed-responsive embed-responsive-1by1">
+                    <img class="embed-responsive-item" :src="item.img">
+                    </div>
+                    </div>
+                </div>
+                <!--小设备卡片-->
+                <div class="card rounded position-relative d-block d-sm-none">
+                    <div class="card-header p-1">
+                        <div class="row justify-content-center">
+                            <h1 class="bg-info p-1 rounded m-1">{{item.title}}</h1>
+                        </div>
+                        <div class="row justify-content-center">
+                            <p class="mb-0" style="font-size: 0.5rem">{{item.date}}</p>
+                        </div>
+                    </div>
+                    <div class=" border rounded-sm border-dark m-2">
+                        <div class="embed-responsive embed-responsive-1by1">
+                            <img class="embed-responsive-item" :src="item.img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <!--页码-->
+    <div class="row justify-content-end">
+        <ul class="pagination">
+            <li v-for="i in index" class="page-item" :class="{'active':act(i)}"><a class="page-link" @click="changePage">{{i}}</a></li>
+            <span class="page-item"><a class="page-link" href="#">...</a></span>
+            <li class="page-item"><a class="page-link" @click="changePage">{{totalpage}}</a></li>
+        </ul>
+    </div>
+
+    <hr>
+    <!--页脚-->
+    <div class="row justify-content-center">
+        <footer class="text-black-50">
+            <span>© 2019 花火学园.Powered by WordPress. | </span>
+            <span data-toggle="tooltip" title="请联系:3451432292@qq.com">意见与建议</span> |
+            <span data-toggle="tooltip" title="讨论群:">加入我们</span>
+        </footer>
+    </div>
+</div>
+</div>
+
+<div class="fixed-bottom d-flex justify-content-center invisible">
+    <span class="spinner-border"></span>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="js/vue.min.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+</script>
+<script>
+var app=new Vue({
+    el:'#app',
+    data:{
+        pagesize:4,
+        page:1,
+        totalpage:1,
+        vnlist:[],
+        items:[],
+        keyword:[]
+    },
+    created(){
+        fetch('vn.json')
+            .then((res)=>res.json())
+            .then((data)=>{
+                this.vnlist=data;
+                this.items=this.vnlist.sort(function (a,b) {
+                    return a.date-b.date;
+                });
+                this.totalpage=Math.ceil(this.vnlist.length/this.pagesize);
+            });
+    },
+    computed:{
+        pagelist(){
+            return this.items.slice(this.pagesize*(this.page-1),this.pagesize*this.page);
+        },
+        index(){
+            var a=[];
+            for(var i=(this.page > 3 ? this.page - 3 : 1); i <= ((this.page + 5) < this.page ? (this.page + 5) : this.page); i++)a.push(i);
+            return a;
+        }
+    },
+    methods:{
+        search:function(){
+            this.items=this.vnlist.filter(function (x) {
+                return x.title.indexOf(app.$data.keyword)!=-1;
+            })
+        },
+        changePage:function (event) {
+            this.page=event.target.innerText;
+        },
+        act(i){
+            return this.page==i;
+        }
+    }
+}
+)
+</script>
+</body>
+</html>
