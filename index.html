@@ -120,7 +120,7 @@
                     </div>
                     <div class="shadow border rounded-sm border-dark m-2">
                     <div class="embed-responsive embed-responsive-1by1">
-                    <img class="embed-responsive-item" :src="item.img">
+                    <a :href="item.url"><img class="embed-responsive-item" :src="item.img"></a>
                     </div>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                     </div>
                     <div class=" border rounded-sm border-dark m-2">
                         <div class="embed-responsive embed-responsive-1by1">
-                            <img class="embed-responsive-item" :src="item.img">
+                            <a :href="item.url"><img class="embed-responsive-item" :src="item.img"></a>
                         </div>
                     </div>
                 </div>
@@ -182,7 +182,7 @@
 var app=new Vue({
     el:'#app',
     data:{
-        pagesize:4,
+        pagesize:9,
         page:1,
         totalpage:1,
         vnlist:[],
