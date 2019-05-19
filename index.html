@@ -206,7 +206,7 @@ var app=new Vue({
         },
         index(){
             var a=[];
-            for(var i=(this.page > 3 ? this.page - 3 : 1); i <= ((this.page + 5) < this.page ? (this.page + 5) : this.page); i++)a.push(i);
+            for(var i=Math.max(this.page-3,1); i < Math.min(Number(this.page)+Number(5),this.totalpage); i++)a.push(i);
             return a;
         }
     },
