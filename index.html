@@ -174,11 +174,6 @@
 <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="js/vue.min.js"></script>
 <script>
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    })
-</script>
-<script>
 var app=new Vue({
     el:'#app',
     data:{
@@ -195,7 +190,7 @@ var app=new Vue({
             .then((data)=>{
                 this.vnlist=data;
                 this.items=this.vnlist.sort(function (a,b) {
-                    return a.date-b.date;
+                    return Number(b.date)-Number(a.date);
                 });
                 this.totalpage=Math.ceil(this.vnlist.length/this.pagesize);
             });
@@ -225,6 +220,11 @@ var app=new Vue({
     }
 }
 )
+</script>
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
 </script>
 </body>
 </html>
