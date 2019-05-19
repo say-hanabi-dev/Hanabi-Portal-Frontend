@@ -190,7 +190,7 @@ var app=new Vue({
         keyword:[]
     },
     created(){
-        fetch('vn.json')
+        fetch('https://www.say-huahuo.com/vn.json')
             .then((res)=>res.json())
             .then((data)=>{
                 this.vnlist=data;
