@@ -148,7 +148,7 @@
         <ul class="pagination">
             <li v-for="i in index" class="page-item" :class="{'active':act(i)}"><a class="page-link" @click="changePage">{{i}}</a></li>
             <span class="page-item"><a class="page-link" href="#">...</a></span>
-            <li class="page-item"><a class="page-link" @click="changePage">{{totalpage}}</a></li>
+            <li class="page-item" :class="{'active':act(i)}"><a class="page-link" @click="changePage">{{totalpage}}</a></li>
         </ul>
     </div>
 
@@ -157,8 +157,14 @@
     <div class="row justify-content-center">
         <footer class="text-black-50">
             <span>© 2019 花火学园.Powered by WordPress. | </span>
-            <span data-toggle="tooltip" title="请联系:3451432292@qq.com">意见与建议</span> |
+            <span data-toggle="tooltip" title="请联系:3451432292@qq.com unmayx@qq.com">意见与建议</span> |
             <span data-toggle="tooltip" title="花火的微博（ID 姬野永远）">关注我们</span>
+             <!--空行-->
+            <div class="invisible">
+                <hr>
+                <hr>
+                <hr>
+            </div>
         </footer>
     </div>
 </div>
@@ -177,12 +183,13 @@
 var app=new Vue({
     el:'#app',
     data:{
-        pagesize:9,
+        pagesize:6,
         page:1,
+        startpage:1,
         totalpage:1,
         vnlist:[],
         items:[],
-        keyword:[]
+        keyword:[]        
     },
     created(){
         fetch('vn.json')
@@ -197,10 +204,18 @@ var app=new Vue({
     },
     updated(){
         $('[data-toggle="tooltip"]').tooltip();
+        setTimeout(function () {
+            $(window).unbind();
+            $(window).bind("scroll",function () {
+                if(document.body.offsetHeight==document.documentElement.scrollTop+document.documentElement.clientHeight){
+                    $(window).unbind();
+                    app.page=Math.min(Number(app.page)+1,app.totalpage);};
+            })
+        },1000);
     },
     computed:{
         pagelist(){
-            return this.items.slice(this.pagesize*(this.page-1),this.pagesize*this.page);
+            return this.items.slice(this.pagesize*(this.startpage-1),this.pagesize*this.page);
         },
         index(){
             var a=[];
@@ -216,6 +231,7 @@ var app=new Vue({
         },
         changePage:function (event) {
             this.page=event.target.innerText;
+            this.startpage=this.page;
         },
         act(i){
             return this.page==i;
