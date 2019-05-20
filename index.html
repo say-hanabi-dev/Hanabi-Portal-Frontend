@@ -69,7 +69,7 @@
     </style>
 
 </head>
-<body>
+<body @scroll="scrol">
 <div id="app">
 <!--页眉-->
 <header>
@@ -151,7 +151,6 @@
             <li class="page-item" :class="{'active':act(i)}"><a class="page-link" @click="changePage">{{totalpage}}</a></li>
         </ul>
     </div>
-
     <hr>
     <!--页脚-->
     <div class="row justify-content-center">
@@ -169,7 +168,6 @@
     </div>
 </div>
 </div>
-
 <div class="fixed-bottom d-flex justify-content-center invisible">
     <span class="spinner-border"></span>
 </div>
@@ -200,7 +198,7 @@ var app=new Vue({
                     return Number(b.date)-Number(a.date);
                 });
                 this.totalpage=Math.ceil(this.vnlist.length/this.pagesize);
-            });
+            })
     },
     updated(){
         $('[data-toggle="tooltip"]').tooltip();
